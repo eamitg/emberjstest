@@ -2,12 +2,12 @@ class CategoriesController < ApplicationController
 	respond_to :json # default to Active Model Serializers
 	
 	def index
-		respond_with  Category.all, each_serializer: CategorySerializer
-		#render :json =>
-			#{
-				#:categories => ActiveModel::ArraySerializer.new(Category.all, each_serializer: CategorySerializer),
-		#		:products => ActiveModel::ArraySerializer.new(Product.all, each_serializer: ProductSerializer)
-		#	}
+		#respond_with  Category.all, each_serializer: CategorySerializer
+		render :json =>
+			{
+				:categories => ActiveModel::ArraySerializer.new(Category.all, each_serializer: CategorySerializer),
+				:products => ActiveModel::ArraySerializer.new(Product.all, each_serializer: ProductSerializer)
+			}
 	end
 
 	def show

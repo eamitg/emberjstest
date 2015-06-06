@@ -1,3 +1,57 @@
-<script type="text/x-handlebars">
-  {{ outlet }}
+<script type="text/x-handlebars" data-template-name="categories">
+<div class='container'>
+	<div class="row">
+		<div class='col-lg-3'></div>
+		<div class="col-lg-6">
+			<section id="categoriesapp">
+				<header id="header">
+					<h1>Categories</h1>
+					<div class='form-group'>
+						<label >Create Category</label>
+						{{input type="text" id="new-category" class="form-control" placeholder="Add new Category" value=newCategory action="createCategory" autofocus="autofocus"}}
+					</div>
+				</header>
+			</section>
+			<ul id="category-list" class="list-group">
+			    {{#each itemController="category"}}
+					<li {{bind-attr class="isEditing:editing isListItem isShowingProducts:active"}} style="min-height: 60px;">
+						{{#if isEditing}}
+							<div class="col-lg-10" style="height:30px;">
+								{{edit-category class="form-control edit" value=name focus-out="acceptChanges" insert-newline="acceptChanges" autofocus="autofocus"}}
+							</div>
+						{{else}}
+							<label {{action "toggle"}}>
+								{{name}}
+								<span class="badge">{{products.length}}</span>
+							</label>
+							<span {{action "removeCategory"}} class="fa fa-times destroy" style="float: right;"></span>
+							{{#if isShowingProducts}}
+								<span class="fa fa-chevron-circle-up"></span>
+								<div class='form-group'>
+									<label >Create Products</label>
+									{{input type="text" id="new-product-name" class="form-control" placeholder="Name of Product" value=newProductName action="createCategory" autofocus="autofocus"}}
+									{{input type="hidden" class="form-control" placeholder="Name of Product" value=id action="createCategory" autofocus="autofocus" id="new-product-category_id"}}
+									{{input type="number" class="form-control" placeholder="Price of Product"  id="new-product-price" value=newProductPrice}}
+									<button class="btn btn-success form-control" {{action "createCategoryProduct"}}>Create</button>
+								</div>
+								<ul class="products-list" style="color: black;">
+									{{#each product in products }}
+										<li class='list-group-item'>
+											{{product.name}}
+										</li>
+									{{/each}}
+								</ul>
+							{{else}}
+								<span class="fa fa-chevron-circle-down"></span>
+							{{/if}}
+						{{/if}}
+					</li>
+				{{/each}}
+			</ul>
+			<footer id="info">
+				<p>Double-click to edit a Category</p>
+			</footer>
+		</div>
+	</div>
+</div>
 </script>

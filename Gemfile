@@ -25,6 +25,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'ember-rails'
 gem 'ember-source'
 gem 'emblem-rails'
+gem "less-rails"
+gem "font-awesome-rails"
 gem 'twitter-bootstrap-rails'
 gem 'active_model_serializers'
 # Use ActiveModel has_secure_password
